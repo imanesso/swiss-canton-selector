@@ -1,0 +1,36 @@
+.snowman {
+    -fx-background-color: rgba(255, 255, 255, 255);
+    -base-color: rgb(243, 246, 251);
+}
+
+.snowman .snow{
+    -fx-fill: -base-color;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.58), 20, 0, 0, 0);
+}
+
+.snowman .button {
+    -fx-fill: rgb(51,61,66);
+}
+
+.snowman .nose {
+    -fx-fill: rgb(252,131,80);
+}
+
+.regionselector {
+    -fx-background-color: rgba(255, 255, 255, 255);
+    -fx-fill:             -base-color;
+    -base-color: rgb(0, 188, 214);
+    -hover-color: rgb(0, 143, 161);
+    -select-color: rgb(77, 128, 128);
+}
+
+.regionselector .defaultregion{
+    -fx-fill:             -base-color;
+}
+
+.regionselector .display {
+    -fx-font-family: 'Lato Light';
+    -fx-font-size:   24;
+    -fx-fill:        derive(-base-color, 90%);
+    -fx-effect:      dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 )
+}
