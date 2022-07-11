@@ -18,10 +18,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static cantonselector.SkiRegion.Canton;
 import static cantonselector.SkiRegion.RegionName;
@@ -47,6 +44,7 @@ public class RegionSelectorControl extends Region {
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
     private static final double MAXIMUM_WIDTH = 2000;
     private final String filepath = getClass().getResource("/images/Suisse_cantons.svg").toExternalForm();
+    private final boolean useRegions = false;
 
     // Parts of which the region selector consists of
     private Text display;
@@ -229,12 +227,16 @@ public class RegionSelectorControl extends Region {
     }
 
     private void addAllRegions() {
-        addCantonsToRegion(RegionName.WW, getListOfCantonSVGs(Canton.VD, Canton.VS));
-        addCantonsToRegion(RegionName.BE, getListOfCantonSVGs(Canton.BE));
-        addCantonsToRegion(RegionName.ZS, getListOfCantonSVGs(Canton.LU, Canton.UR, Canton.SZ, Canton.OW, Canton.NW, Canton.ZG));
-        addCantonsToRegion(RegionName.GR, getListOfCantonSVGs(Canton.GR));
-        addCantonsToRegion(RegionName.OS, getListOfCantonSVGs(Canton.SG, Canton.GL));
-        addCantonsToRegion(RegionName.TI, getListOfCantonSVGs(Canton.TI));
+        if (useRegions) {
+            addCantonsToRegion(new SkiRegion.RegionName("WW", "Waadt und Wallis"), getListOfCantonSVGs(Canton.VD, Canton.VS));
+            addCantonsToRegion(new SkiRegion.RegionName("BE", "Berner Oberland"), getListOfCantonSVGs(Canton.BE));
+            addCantonsToRegion(new SkiRegion.RegionName("ZS", "Zentralschweiz"), getListOfCantonSVGs(Canton.LU, Canton.UR, Canton.SZ, Canton.OW, Canton.NW, Canton.ZG));
+            addCantonsToRegion(new SkiRegion.RegionName("GR", "Graubünden"), getListOfCantonSVGs(Canton.GR));
+            addCantonsToRegion(new SkiRegion.RegionName("OS", "Ostschweiz"), getListOfCantonSVGs(Canton.SG, Canton.GL));
+            addCantonsToRegion(new SkiRegion.RegionName("TI", "Tessin"), getListOfCantonSVGs(Canton.TI));
+        } else {
+            useCantonsAsRegions();
+        }
     }
 
     private List<SVGPath> getListOfCantonSVGs(Canton... cantons) {
@@ -248,6 +250,15 @@ public class RegionSelectorControl extends Region {
     private void addCantonsToRegion(RegionName regionName, List<SVGPath> cantons) {
         var region = new SkiRegion(regionName, cantons);
         regions.put(region.getRegionName().getName(), region);
+    }
+
+    private void useCantonsAsRegions() {
+        for (var item :
+                Canton.values()) {
+            addCantonsToRegion(new RegionName(item.getShortName(), item.getName()), getListOfCantonSVGs(Arrays.stream(Canton.values())
+                    .filter(t -> t.getName().equals(item.getName()))
+                    .findFirst().get()));
+        }
     }
 
     private void giveRegionColor(SkiRegion skiRegion, Color color) {

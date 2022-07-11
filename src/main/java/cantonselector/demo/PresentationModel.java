@@ -18,7 +18,7 @@ public class PresentationModel {
 
     public ObservableList<String> getCantonStringList() {
         ArrayList<String> list = new ArrayList<>();
-        var vals = SkiRegion.RegionName.values();
+        var vals = SkiRegion.RegionName.getRegions();
         for (var x: vals){
             list.add(x.getName());
         }

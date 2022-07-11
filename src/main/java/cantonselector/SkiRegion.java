@@ -2,6 +2,7 @@ package cantonselector;
 
 import javafx.scene.shape.SVGPath;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SkiRegion {
@@ -19,38 +20,6 @@ public class SkiRegion {
 
     public List<SVGPath> getCantonSvgs() {
         return cantonSvgs;
-    }
-
-    public enum RegionName {
-        WW("WW", "Waadt und Wallis"),
-        BE("BE", "Berner Oberland"),
-        ZS("ZS", "Zentralschweiz"),
-        GR("GR", "Graubünden"),
-        OS("OS", "Ostschweiz"),
-        TI("TI", "Tessin");
-
-        private final String abbreviation;
-        private final String longName;
-        private final String name;
-
-        RegionName(String abbreviation, String longName) {
-            this.abbreviation = abbreviation;
-            this.longName = longName;
-            //TODO 1) change to abbreviation if that's needed
-            this.name = longName;
-        }
-
-        public String getAbbreviation() {
-            return abbreviation;
-        }
-
-        public String getLongName() {
-            return longName;
-        }
-
-        public String getName() {
-            return name;
-        }
     }
 
     public enum Canton {
@@ -95,6 +64,44 @@ public class SkiRegion {
 
         public String getName() {
             return name;
+        }
+    }
+
+    public static class RegionName {
+        private final String abbreviation;
+        private final String longName;
+        private final String name;
+
+        public RegionName(String abbreviation, String longName) {
+            this.abbreviation = abbreviation;
+            this.longName = longName;
+            //TODO 1) change to abbreviation if that's needed
+            this.name = longName;
+        }
+
+        public String getAbbreviation() {
+            return abbreviation;
+        }
+
+        public String getLongName() {
+            return longName;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public static List<RegionName> getRegions() {
+            ArrayList<RegionName> regions = new ArrayList<>();
+
+            regions.add(new RegionName("WW", "Waadt und Wallis"));
+            regions.add(new RegionName("BE", "Berner Oberland"));
+            regions.add(new RegionName("ZS", "Zentralschweiz"));
+            regions.add(new RegionName("GR", "Graubünden"));
+            regions.add(new RegionName("OS", "Ostschweiz"));
+            regions.add(new RegionName("TI", "Tessin"));
+
+            return regions;
         }
     }
 }
