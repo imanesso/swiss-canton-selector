@@ -44,6 +44,7 @@ public class RegionSelectorControl extends Region {
     private static final double MINIMUM_HEIGHT = MINIMUM_WIDTH / ASPECT_RATIO;
     private static final double MAXIMUM_WIDTH = 2000;
     private final String filepath = getClass().getResource("/images/Suisse_cantons.svg").toExternalForm();
+    //TODO 1) change this to true if you want to use set of cantons called regions
     private final boolean useRegions = false;
 
     // Parts of which the region selector consists of

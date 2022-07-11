@@ -1,5 +1,5 @@
 # swiss-canton-selector
-**A custom control to select cantons on a map**
+**A custom control to select cantons or regions on a map**
 
 ## What is the Swiss Canton Selector
 A custom control where you can select a canton or a set of cantons from a map and bind the selection to whatever you want

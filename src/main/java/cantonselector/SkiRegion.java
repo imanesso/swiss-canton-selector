@@ -75,7 +75,7 @@ public class SkiRegion {
         public RegionName(String abbreviation, String longName) {
             this.abbreviation = abbreviation;
             this.longName = longName;
-            //TODO 1) change to abbreviation if that's needed
+            //TODO 2) change to abbreviation if that's needed
             this.name = longName;
         }
 
